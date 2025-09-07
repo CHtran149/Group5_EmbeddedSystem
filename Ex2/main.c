@@ -17,7 +17,6 @@ void Config_GPIO(){
 	
 	button.GPIO_Mode	= GPIO_Mode_IPU;
 	button.GPIO_Pin		= GPIO_Pin_2;
-	button.GPIO_Speed	= GPIO_Speed_10MHz;
 	
 	GPIO_Init(GPIOA, &button);
 	
