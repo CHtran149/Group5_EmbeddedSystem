@@ -1,4 +1,4 @@
-# Mô tả chương trình nhấp nháy 2 led với chu kì 1s trên STM32F103C8T6
+# Mô tả chương trình thay đổi trạng thái led khi nhấn nút trên STM32F103C8T6
 Chương trình này điều khiển hai chân PA1 và PA2 nhấp nháy theo chu kì 1s
 
 ## Các bước thực hiện: 
