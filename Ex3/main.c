@@ -2,9 +2,6 @@
 #include "stm32f10x_exti.h"             // Keil::Device:StdPeriph Drivers:EXTI
 #include "stm32f10x_gpio.h"             // Keil::Device:StdPeriph Drivers:GPIO
 #include "stm32f10x_rcc.h"              // Keil::Device:StdPeriph Drivers:RCC
-#include "stm32f10x_tim.h"              // Keil::Device:StdPeriph Drivers:TIM
-
-
 
 void Config_GPIO(){
 	GPIO_InitTypeDef led;

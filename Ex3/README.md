@@ -21,8 +21,8 @@ void Config_GPIO(){
 }
 ```
 
-- Cấu hình chân PA1 và PA3 điều khiển 2 led. Trong đó PA3 là led luôn nhấp nháy và PA1 là led đảo trạng thái.
-- Cấu hình chân PA2 là nút nhấn ở chế độ Input Up.
+- Cấu hình chân PA1 và PA3 điều khiển 2 led. Trong đó PA3 là led luôn nhấp nháy trong hàm main và PA1 là led đảo trạng thái trong ngắt.
+- Cấu hình chân PA2 là nút nhấn ở chế độ Input Up, dùng để cấu hình ngắt ngoài (EXTI).
 
 ### 2. Cấu hình NVIC và EXTI 
 ```c
@@ -48,8 +48,9 @@ void Config_Exti(){
 	EXTI_Init(&exti);
 }
 ``` 
+- ` NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00) ` Vector Table tại 0x08000000 (mặc định).
 - Nhóm PreemptionPriority có mức độ ưu tiên cao hơn SubPriority và cấp độ ưu tiên càng nhỏ thì ưu tiên càng cao. Có nghĩa là cấp 0 của nhóm PreemptionPriority sẽ có mức độ ưu tiên cao nhất.
-- Line2 vì lựa chọn nút bấm là PA2. EXTI_Trigger_Falling tức là lựa chọn sườn xuống của xung clock. Khi chưa ấn nút chân PA2 ở mức logic 1, khi ấn nút PA2 ở mức logic 0.
+- Line2 vì lựa chọn nút bấm là PA2. EXTI_Trigger_Falling tức là lựa chọn sườn xuống của xung clock.
 ### 3. Hàm xử lý ngắt 
 ```c
 void EXTI2_IRQHandler(){
