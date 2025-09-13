@@ -82,6 +82,10 @@ int main(){
 - Kết quả: LED nhấp nháy với chu kỳ 1 giây (0.5s sáng, 0.5s tắt).  
 
 ---
+## Hình ảnh mô phỏng trên Logic Analyzer
+![Logic Analyzer](images/anh1.jpg)
+
+
 ## Video Mô Phỏng:
 > https://youtube.com/shorts/UtYWEgx-k1g?feature=share
 
