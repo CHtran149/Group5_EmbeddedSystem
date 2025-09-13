@@ -1,5 +1,13 @@
-# MÔN HỆ THỐNG NHÚNG - Bài 3: Điều khiển ngắt ngoài (EXTI)
-Đề bài: Cấu hình ngắt ngoài cho một nút ấn, khi ấn nút trạng thái led đảo ngược. Trong khi đó, một led khác nhấp nháy với chu kì 1Hz.
+# MÔN HỆ THỐNG NHÚNG - Bài 3: Cấu hình ngắt ngoài cho một nút ấn, khi ấn nút trạng thái led đảo ngược. Trong khi đó, một led khác nhấp nháy với chu kì 1Hz.
+
+## Giới thiệu  
+Chương trình này được viết cho **STM32F103C8T6** (dòng STM32F10x), minh họa cách:  
+- Cấu hình **GPIO** để điều khiển LED và đọc nút nhấn.  
+- Sử dụng **EXTI (External Interrupt)** để phát hiện sự kiện nhấn nút.  
+- Cấu hình **NVIC (Nested Vectored Interrupt Controller)** để xử lý ngắt.  
+- Điều khiển LED theo trạng thái nút nhấn và đồng thời nháy một LED khác trong vòng lặp chính.  
+
+---
 
 ## Các bước thực hiện:
 ### 1. Cấu hình chân GPIO.
@@ -21,8 +29,10 @@ void Config_GPIO(){
 }
 ```
 
-- Cấu hình chân PA1 và PA3 điều khiển 2 led. Trong đó PA3 là led luôn nhấp nháy trong hàm main và PA1 là led đảo trạng thái trong ngắt.
-- Cấu hình chân PA2 là nút nhấn ở chế độ Input Up, dùng để cấu hình ngắt ngoài (EXTI).
+- **PA1, PA3**: cấu hình làm ngõ ra để điều khiển LED.
+	- **PA1**: LED thay đổi trạng thái khi nhấn nút.
+	- **PA3**: LED nhấp nháy trong vòng lặp main.
+- **PA2**: cấu hình làm ngõ vào (Input Pull-up) để đọc trạng thái nút nhấn.
 
 ### 2. Cấu hình NVIC và EXTI 
 ```c
@@ -48,9 +58,10 @@ void Config_Exti(){
 	EXTI_Init(&exti);
 }
 ``` 
-- ` NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00) ` Vector Table tại 0x08000000 (mặc định).
-- Nhóm PreemptionPriority có mức độ ưu tiên cao hơn SubPriority và cấp độ ưu tiên càng nhỏ thì ưu tiên càng cao. Có nghĩa là cấp 0 của nhóm PreemptionPriority sẽ có mức độ ưu tiên cao nhất.
-- Line2 vì lựa chọn nút bấm là PA2. EXTI_Trigger_Falling tức là lựa chọn sườn xuống của xung clock.
+- **NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00)**: sử dụng bảng vector mặc định trong Flash.
+- **NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0)**: chỉ dùng SubPriority, không có PreemptionPriority.
+- **EXTI2_IRQn**: chọn ngắt ngoài trên line 2 (ứng với chân PA2).
+- **EXTI_Trigger_Falling**: ngắt được kích hoạt khi nút nhấn tạo sườn xuống.
 ### 3. Hàm xử lý ngắt 
 ```c
 void EXTI2_IRQHandler(){
@@ -61,7 +72,8 @@ void EXTI2_IRQHandler(){
 	EXTI_ClearITPendingBit(EXTI_Line2);
 }
 ``` 
-- Biến led1_state là biến để thay đổi trạng thái của led PA1 khi nhấn nút.
+- Đọc trạng thái hiện tại của LED PA1.
+- Khi nhấn nút (PA2 = 0), đảo trạng thái LED PA1..
 - ` EXTI_ClearITPendingBit(EXTI_Line2) ` xóa cơ ngắt để sử dụng ngắt cho lần tiếp theo.
 ### 4.Hàm delay
 ```c
@@ -72,7 +84,7 @@ void Delay(unsigned int t){
 	}
 } 
 ```
-- Hàm trên tạo độ trễ cho led, đơn vị là ms.
+- Hàm trên tạo độ trễ cho led, đơn vị là ms. Dùng để nhấp nháy LED PA3 trong hàm main.
 ### 5. Hàm main
 ```c
 int main(){
@@ -94,4 +106,5 @@ int main(){
 Tóm tắt chương trình: Chương trình chính vẫn nhấp nháy led PA3 với chu kì 1s. Khi ấn nút PA2 thì led PA1 đảo trạng thái.
 
 ## Video Mô phỏng
->
+> https://youtube.com/shorts/MtFDtrvz5Uk?feature=share
+

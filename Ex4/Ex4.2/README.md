@@ -96,7 +96,8 @@ int main(){
 
 ---
 ## Video Mô Phỏng:
->
+>https://youtube.com/shorts/UtYWEgx-k1g?feature=share
+
 
 
 
