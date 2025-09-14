@@ -30,7 +30,6 @@ void Config_GPIO(){
 	
 	uart.GPIO_Mode			= GPIO_Mode_IN_FLOATING;
 	uart.GPIO_Pin				= GPIO_Pin_10;
-	uart.GPIO_Speed			= GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &uart);
 }
 
@@ -40,7 +39,7 @@ void Config_Uart(){
 	
 	usart.USART_BaudRate				= 9600;
 	usart.USART_HardwareFlowControl			= USART_HardwareFlowControl_None;
-	usart.USART_Mode						= USART_Mode_Rx | USART_Mode_Tx;
+	usart.USART_Mode						= USART_Mode_Rx;
 	usart.USART_Parity					= USART_Parity_No;
 	usart.USART_StopBits				= USART_StopBits_1;
 	usart.USART_WordLength			= USART_WordLength_8b;
@@ -51,16 +50,6 @@ void Config_Uart(){
 	USART_Cmd(USART1, ENABLE);
 }
 
-void uart_SendChar(char c){
-	USART_SendData(USART1, c);
-	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-}
-
-void uart_SendStr(char *str){
-	while(*str != '\0'){
-		uart_SendChar(*str++);
-	}
-}
 
 uint16_t UARTx_Getc(USART_TypeDef* USARTx){
 	return USART_ReceiveData(USARTx);
