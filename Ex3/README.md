@@ -38,7 +38,6 @@ void Config_GPIO(){
 ```c
 void Config_Nvic(){
 	NVIC_InitTypeDef nvic;
-	NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 	
 	nvic.NVIC_IRQChannel = EXTI2_IRQn;
@@ -58,7 +57,6 @@ void Config_Exti(){
 	EXTI_Init(&exti);
 }
 ``` 
-- **NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00)**: sử dụng bảng vector mặc định trong Flash.
 - **NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0)**: chỉ dùng SubPriority, không có PreemptionPriority.
 - **EXTI2_IRQn**: chọn ngắt ngoài trên line 2 (ứng với chân PA2).
 - **EXTI_Trigger_Falling**: ngắt được kích hoạt khi nút nhấn tạo sườn xuống.

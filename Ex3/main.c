@@ -22,7 +22,6 @@ void Config_GPIO(){
 void Config_Nvic(){
 	NVIC_InitTypeDef nvic;
 	
-	NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x00);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 	
 	nvic.NVIC_IRQChannel = EXTI2_IRQn;

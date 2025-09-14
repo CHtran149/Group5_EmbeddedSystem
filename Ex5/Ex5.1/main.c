@@ -45,16 +45,6 @@ void uart_SendStr(char *str){
 	}
 }
 
-struct __FILE { 
-    int dummy; 
-}; 
-FILE __stdout; 
-  
-int fputc(int ch, FILE *f) { 
-    uart_SendChar(ch); 
-    return ch; 
-} 
-
 void Delay_ms(unsigned int t){
 	unsigned int i, j;
 	for(i = 0; i < t; i++){
@@ -68,6 +58,5 @@ int main(){
 	while(1){
 		uart_SendStr("Hello from STM32!\n");
 		Delay_ms(500);
-		
 	}
 }
