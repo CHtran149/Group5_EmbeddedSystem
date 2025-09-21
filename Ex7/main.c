@@ -117,9 +117,9 @@ int main(){
 	Config_SPI();
 	W25Q64_ReadID(id);
 	while(1){	
-		printf("Manufacturer ID: 0x%02X\r\n", id[0]);
-    printf("Memory Type    : 0x%02X\r\n", id[1]);
-    printf("Capacity       : 0x%02X\r\n", id[2]);
+		printf("Manufacturer ID: 0x%02X\r\n", id[0]); // ma nha san xuat : Winbond: 0xEF
+    printf("Memory Type    : 0x%02X\r\n", id[1]); // Loai chip
+    printf("Capacity       : 0x%02X\r\n", id[2]); // dung luong.
 		Delay(500);
 	}
 }

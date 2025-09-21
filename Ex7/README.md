@@ -85,7 +85,7 @@ void Config_SPI(){
 }
 ```
 - PA4 = CS, PA5 = CLK, PA6 = MISO, PA7 = MOSI.
-- SPI master, 8-bit, MSB trước, tốc độ chia 16 từ APB2.
+- SPI master, SPI Mode 0, 8-bit, MSB trước, tốc độ chia 16 từ APB2.
   
 ### 4. Hàm truyền và nhận dữ liệu SPI.
 ```c
@@ -114,4 +114,23 @@ void W25Q64_ReadID(uint8_t *id){
 - Kéo CS xuống để chọn chip.
 - Gửi lệnh 0x9F đọc ID.
 - Nhận 3 byte ID và giải phóng CS.
+### 6. Hàm main.
+```c
+int main(){
+	uint8_t id[3];
+	
+	Config_Uart();
+	Config_SPI();
+	W25Q64_ReadID(id);
+	while(1){	
+		printf("Manufacturer ID: 0x%02X\r\n", id[0]); // ma nha san xuat : Winbond: 0xEF
+        printf("Memory Type    : 0x%02X\r\n", id[1]); // Loai chip
+        printf("Capacity       : 0x%02X\r\n", id[2]); // dung luong.
+		Delay(500);
+	}
+}
+```
+- Hàm main thực hiện gửi JEDEC ID (0x9F) và trả về Manufacturer ID, Memory Type, Capacity.
 
+## Video mô phỏng
+> https://youtube.com/shorts/NnCrl1b1bwE?feature=share
