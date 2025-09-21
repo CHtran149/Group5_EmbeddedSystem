@@ -100,6 +100,9 @@ int main(){
 
 ![Hercules](images/images_01.png)
 
+
+### Kết quả quan sát trên logic analyzer
+![Hercules](images/images_02.png)
 ---
 ### Video mô phỏng
->
+>https://youtube.com/shorts/Brip_Tq3fU8?feature=share

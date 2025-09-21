@@ -45,9 +45,9 @@ void Config_Uart(){
 	usart.USART_WordLength			= USART_WordLength_8b;
 	
 	USART_Init(USART1, &usart);
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-	NVIC_EnableIRQ(USART1_IRQn);
-	USART_Cmd(USART1, ENABLE);
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);// Bat ngat thanh ghi nhan du lieu khong trong.
+	NVIC_EnableIRQ(USART1_IRQn); // Bat ngat USART trong NVIC.
+	USART_Cmd(USART1, ENABLE);//Bat thiet bi ngoai vi UART duoc chi dinh.
 }
 
 
@@ -56,7 +56,7 @@ uint16_t UARTx_Getc(USART_TypeDef* USARTx){
 }
 
 void USART1_IRQHandler(){
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){ //neu thanh ghi RXNE khong trong (1) thi thuc hien ngat.
 		pcr = UARTx_Getc(USART1);
 		if(pcr == '\r'){
 			stt = 1;
@@ -76,7 +76,7 @@ int main(){
 	GPIO_SetBits(GPIOA, GPIO_Pin_0);
 	while(1){
 		if(stt){
-			if(strstr(res, ONLED) != NULL){
+			if(strstr(res, ONLED) != NULL){ //hàm strstr tìm con tro dau tien den chuoi con trong chuoi lon.
 				GPIO_ResetBits(GPIOA, GPIO_Pin_0);
 			}
 			else if(strstr(res, OFFLED) != NULL){

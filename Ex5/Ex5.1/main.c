@@ -25,7 +25,7 @@ void Config_Uart(){
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	
 	usart.USART_BaudRate			= 9600;
-	usart.USART_HardwareFlowControl		= USART_HardwareFlowControl_None;
+	usart.USART_HardwareFlowControl		= USART_HardwareFlowControl_None; // kiem soat luong bang phan cung, neu chi dung TX RX khong can quan tam.
 	usart.USART_Mode					= USART_Mode_Tx;
 	usart.USART_Parity				= USART_Parity_No;
 	usart.USART_StopBits			= USART_StopBits_1;
@@ -36,7 +36,7 @@ void Config_Uart(){
 
 void uart_SendChar(char c){
 	USART_SendData(USART1, c);
-	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // neu co du lieu truyen trong thi co =1; khong trong (co du lieu) = 0;
 }
 
 void uart_SendStr(char *str){

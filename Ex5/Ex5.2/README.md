@@ -108,4 +108,4 @@ int main(){
 
 ---
 ## Video mô phỏng
->
+>https://youtube.com/shorts/UdlpXTTn7Zg?feature=share
