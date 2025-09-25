@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <string.h>
 
+
+volatile uint16_t adc_value = 0;
+volatile uint8_t flag_stt = 0;
+
 void Delay_ms(unsigned int t){
 	unsigned int i, j;
 	for(i=0; i<t; i++){
@@ -13,29 +17,20 @@ void Delay_ms(unsigned int t){
 	}
 }
 
-void Config_GPIO(){
+void Config_Usart(){
 	GPIO_InitTypeDef gpio;
-	GPIO_InitTypeDef uart;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-	
-	gpio.GPIO_Mode		= GPIO_Mode_AIN;
-	gpio.GPIO_Pin			= GPIO_Pin_0;
+	USART_InitTypeDef usart;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
+	gpio.GPIO_Mode		= GPIO_Mode_AF_PP;
+	gpio.GPIO_Pin			= GPIO_Pin_9;
+	gpio.GPIO_Speed		= GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &gpio);
 	
-	uart.GPIO_Mode		= GPIO_Mode_AF_PP;
-	uart.GPIO_Pin			= GPIO_Pin_9;
-	uart.GPIO_Speed		= GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &uart);
+	gpio.GPIO_Mode		= GPIO_Mode_IN_FLOATING;
+	gpio.GPIO_Pin			= GPIO_Pin_10;
+	gpio.GPIO_Speed		= GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &gpio);
 	
-	uart.GPIO_Mode		= GPIO_Mode_IN_FLOATING;
-	uart.GPIO_Pin			= GPIO_Pin_10;
-	uart.GPIO_Speed		= GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &uart);
-}
-
-void Config_Usart(){
-	USART_InitTypeDef usart;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	usart.USART_BaudRate 			= 9600;
 	usart.USART_HardwareFlowControl			= USART_HardwareFlowControl_None;
 	usart.USART_Mode					= USART_Mode_Rx | USART_Mode_Tx;
@@ -48,8 +43,8 @@ void Config_Usart(){
 }
 
 void uart_SendChar(char _chr){ 
- USART_SendData(USART1, _chr); 
- while(USART_GetFlagStatus(USART1, USART_FLAG_TXE)==RESET); 
+	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE)==RESET); 
+	USART_SendData(USART1, _chr); 
 } 
 
 struct __FILE { 
@@ -63,8 +58,13 @@ int fputc(int ch, FILE *f) {
 } 
 
 void Config_ADC(){
+	GPIO_InitTypeDef gpio;
 	ADC_InitTypeDef adc;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_ADC1, ENABLE);
+	
+	gpio.GPIO_Mode		= GPIO_Mode_AIN;
+	gpio.GPIO_Pin			= GPIO_Pin_0;
+	GPIO_Init(GPIOA, &gpio);
 	//ADC co max_clock ~ 14MHz - 72/6 = 12MHz->chuan
 	RCC_ADCCLKConfig(RCC_PCLK2_Div6);
 	
@@ -89,16 +89,12 @@ void Config_ADC(){
 	NVIC_EnableIRQ(ADC1_2_IRQn);
 }
 
-
-volatile uint16_t adc_value = 0;
-
 void ADC1_2_IRQHandler(void) {
     if(ADC_GetITStatus(ADC1, ADC_IT_EOC) != RESET) {
-        adc_value = ADC_GetConversionValue(ADC1);  // doc du lieu
+				flag_stt = 1;
         ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);   // xóa co ngat
     }
 }
-
 
 int Conversion(int x){
 	return (x * 3300) / 4095;
@@ -106,13 +102,14 @@ int Conversion(int x){
 
 int main(){
 	int vol_mV;
-	
-	Config_GPIO();
 	Config_Usart();
 	Config_ADC();
 	while(1){
-		vol_mV 			= Conversion(adc_value);
-		printf("ADC: %u\t Voltage: %d mV\r\n", adc_value, vol_mV);
-		Delay_ms(500);
+		if(flag_stt){
+			adc_value = ADC_GetConversionValue(ADC1);  // doc du lieu
+			vol_mV 			= Conversion(adc_value);
+			printf("ADC: %u\t Voltage: %d mV\r\n", adc_value, vol_mV);
+			Delay_ms(500);
+		}
 	}
 }

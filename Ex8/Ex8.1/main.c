@@ -14,33 +14,28 @@ void Delay_ms(unsigned int t){
 }
 
 void Config_GPIO(){
-	GPIO_InitTypeDef gpio;
-	GPIO_InitTypeDef uart;
 	GPIO_InitTypeDef button;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-	
-	gpio.GPIO_Mode		= GPIO_Mode_AIN;
-	gpio.GPIO_Pin			= GPIO_Pin_0;
-	GPIO_Init(GPIOA, &gpio);
-	
 	button.GPIO_Mode		= GPIO_Mode_IPU;
 	button.GPIO_Pin			= GPIO_Pin_1;
 	GPIO_Init(GPIOA, &button);
-	
-	uart.GPIO_Mode		= GPIO_Mode_AF_PP;
-	uart.GPIO_Pin			= GPIO_Pin_9;
-	uart.GPIO_Speed		= GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &uart);
-	
-	uart.GPIO_Mode		= GPIO_Mode_IN_FLOATING;
-	uart.GPIO_Pin			= GPIO_Pin_10;
-	uart.GPIO_Speed		= GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA, &uart);
 }
 
 void Config_Usart(){
+	GPIO_InitTypeDef gpio;
 	USART_InitTypeDef usart;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA, ENABLE);
+	
+	gpio.GPIO_Mode		= GPIO_Mode_AF_PP;
+	gpio.GPIO_Pin			= GPIO_Pin_9;
+	gpio.GPIO_Speed		= GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &gpio);
+	
+	gpio.GPIO_Mode		= GPIO_Mode_IN_FLOATING;
+	gpio.GPIO_Pin			= GPIO_Pin_10;
+	gpio.GPIO_Speed		= GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &gpio);
+	
 	usart.USART_BaudRate 			= 9600;
 	usart.USART_HardwareFlowControl			= USART_HardwareFlowControl_None;
 	usart.USART_Mode					= USART_Mode_Rx | USART_Mode_Tx;
@@ -68,8 +63,13 @@ int fputc(int ch, FILE *f) {
 } 
 
 void Config_ADC(){
+	GPIO_InitTypeDef gpio;
 	ADC_InitTypeDef adc;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_GPIOA, ENABLE);
+	
+	gpio.GPIO_Mode		= GPIO_Mode_AIN;
+	gpio.GPIO_Pin			= GPIO_Pin_0;
+	GPIO_Init(GPIOA, &gpio);
 	//ADC co max_clock ~ 14MHz - 72/6 = 12MHz->chuan
 	RCC_ADCCLKConfig(RCC_PCLK2_Div6);
 	
