@@ -35,8 +35,8 @@ void Config_Uart(){
 }
 
 void uart_SendChar(char c){
-	USART_SendData(USART1, c);
 	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET); // neu co du lieu truyen trong thi co =1; khong trong (co du lieu) = 0;
+	USART_SendData(USART1, c);
 }
 
 void uart_SendStr(char *str){
