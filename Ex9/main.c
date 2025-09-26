@@ -21,35 +21,35 @@ void Delay_ms(uint32_t t) {
 }
 /* UART */
 void USART1_Init(void) {
-    GPIO_InitTypeDef gpio;
-    USART_InitTypeDef usart;
-
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
+   GPIO_InitTypeDef gpio;
+   USART_InitTypeDef usart;
+	
+   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
 
     // TX (PA9)
-    gpio.GPIO_Pin = GPIO_Pin_9;
-    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &gpio);
+   gpio.GPIO_Pin = GPIO_Pin_9;
+   gpio.GPIO_Mode = GPIO_Mode_AF_PP;
+   gpio.GPIO_Speed = GPIO_Speed_50MHz;
+   GPIO_Init(GPIOA, &gpio);
 
     // RX (PA10)
-    gpio.GPIO_Pin = GPIO_Pin_10;
-    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-    GPIO_Init(GPIOA, &gpio);
+   gpio.GPIO_Pin = GPIO_Pin_10;
+   gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+   GPIO_Init(GPIOA, &gpio);
 
-    usart.USART_BaudRate = 9600;
-    usart.USART_WordLength = USART_WordLength_8b;
-    usart.USART_StopBits = USART_StopBits_1;
-    usart.USART_Parity = USART_Parity_No;
-    usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-    usart.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
-    USART_Init(USART1, &usart);
-    USART_Cmd(USART1, ENABLE);
+   usart.USART_BaudRate = 9600;
+   usart.USART_WordLength = USART_WordLength_8b;
+   usart.USART_StopBits = USART_StopBits_1;
+   usart.USART_Parity = USART_Parity_No;
+   usart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+   usart.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
+   USART_Init(USART1, &usart);
+   USART_Cmd(USART1, ENABLE);
 }
 
 void USART1_SendChar(char c) {
-    while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-    USART_SendData(USART1, c);
+   while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+   USART_SendData(USART1, c);
 }
 
 struct __FILE { 
@@ -63,57 +63,49 @@ int fputc(int ch, FILE *f) {
 } 
 /* ADC */
 void ADC1_Init(void) {
-    GPIO_InitTypeDef gpio;
-    ADC_InitTypeDef adc;
+  GPIO_InitTypeDef gpio;
+  ADC_InitTypeDef adc;
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_ADC1, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_ADC1, ENABLE);
 
     // PA0 -> ADC1_IN0
-    gpio.GPIO_Pin = GPIO_Pin_0;
-    gpio.GPIO_Mode = GPIO_Mode_AIN;
-    GPIO_Init(GPIOA, &gpio);
+  gpio.GPIO_Pin = GPIO_Pin_0;
+  gpio.GPIO_Mode = GPIO_Mode_AIN;
+  GPIO_Init(GPIOA, &gpio);
 	
 		// PA1 -> LED
-		gpio.GPIO_Mode 		= GPIO_Mode_Out_PP;
-		gpio.GPIO_Pin			= GPIO_Pin_1;
-		gpio.GPIO_Speed		= GPIO_Speed_50MHz;
-		GPIO_Init(GPIOA, &gpio);
+	gpio.GPIO_Mode 		= GPIO_Mode_Out_PP;
+	gpio.GPIO_Pin			= GPIO_Pin_1;
+	gpio.GPIO_Speed		= GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &gpio);
 
     // clock ADC: PCLK2/6 = 72/6 = 12MHz
-    RCC_ADCCLKConfig(RCC_PCLK2_Div6);
+  RCC_ADCCLKConfig(RCC_PCLK2_Div6);
 
-    adc.ADC_Mode = ADC_Mode_Independent;
-    adc.ADC_ScanConvMode = DISABLE;
-    adc.ADC_ContinuousConvMode = ENABLE;
-    adc.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-    adc.ADC_DataAlign = ADC_DataAlign_Right;
-    adc.ADC_NbrOfChannel = 1;
-    ADC_Init(ADC1, &adc);
-
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_55Cycles5);
-
+  adc.ADC_Mode = ADC_Mode_Independent;
+  adc.ADC_ScanConvMode = DISABLE;
+  adc.ADC_ContinuousConvMode = ENABLE;
+  adc.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+  adc.ADC_DataAlign = ADC_DataAlign_Right;
+  adc.ADC_NbrOfChannel = 1;
+  ADC_Init(ADC1, &adc);
+  ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_55Cycles5);
     // Bat DMA cho ADC1
-    ADC_DMACmd(ADC1, ENABLE);
-
-    ADC_Cmd(ADC1, ENABLE);
-
-    // Hieu chuan
-    ADC_ResetCalibration(ADC1);
-    while(ADC_GetResetCalibrationStatus(ADC1));
-    ADC_StartCalibration(ADC1);
-    while(ADC_GetCalibrationStatus(ADC1));
-
-    // Bat dau ADC
-    ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+  ADC_DMACmd(ADC1, ENABLE);
+  ADC_Cmd(ADC1, ENABLE);
+   // Hieu chuan
+  ADC_ResetCalibration(ADC1);
+  while(ADC_GetResetCalibrationStatus(ADC1));
+  ADC_StartCalibration(ADC1);
+  while(ADC_GetCalibrationStatus(ADC1));
+  // Bat dau ADC
+  ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
 /* DMA */
 void DMA1_Channel1_Init(void) {
 	DMA_InitTypeDef dma;
-
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-	DMA_DeInit(DMA1_Channel1);
-
   dma.DMA_PeripheralBaseAddr = (uint32_t)&ADC1->DR;         // nguon: thanh ghi ADC
   dma.DMA_MemoryBaseAddr = (uint32_t)adc_buffer;            // dích: mang RAM
   dma.DMA_DIR = DMA_DIR_PeripheralSRC;                      // chieu: tu peripheral -> RAM
@@ -125,7 +117,6 @@ void DMA1_Channel1_Init(void) {
   dma.DMA_Mode = DMA_Mode_Circular;                         // vòng lap liên tuc
   dma.DMA_Priority = DMA_Priority_High;
   dma.DMA_M2M = DMA_M2M_Disable;
-
   DMA_Init(DMA1_Channel1, &dma);
   // Bat ngat DMA khi truyen xong
   DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
@@ -145,10 +136,10 @@ void Nvic_Init(){
 
 /* ISR DMA */
 void DMA1_Channel1_IRQHandler(void) {
-    if (DMA_GetITStatus(DMA1_IT_TC1)) { //ktra co transfer complete channel1
-        dma_transfer_done = 1; // báo hi?u dã xong 1 vòng DMA
-        DMA_ClearITPendingBit(DMA1_IT_TC1); // xoa co ngat
-    }
+  if (DMA_GetITStatus(DMA1_IT_TC1)) { //ktra co transfer complete channel1
+    dma_transfer_done = 1; // báo hi?u dã xong 1 vòng DMA
+    DMA_ClearITPendingBit(DMA1_IT_TC1); // xoa co ngat
+  }
 }
 
 int main(void) {
@@ -157,9 +148,9 @@ int main(void) {
   uint16_t avg;
   unsigned long voltage_mV;
 	USART1_Init();
+	ADC1_Init();
 	DMA1_Channel1_Init();
   Nvic_Init();
-	ADC1_Init();
     while(1) {
     if (dma_transfer_done) {
 				GPIOA->ODR ^= GPIO_Pin_1;
