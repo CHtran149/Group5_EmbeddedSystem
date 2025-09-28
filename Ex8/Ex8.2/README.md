@@ -110,3 +110,5 @@ int main(){
 - khi cờ báo ngắt bật 1 thì ADC bắt đầu đọc dữ liệu và chuyển đổi qua giá trị điện áp.
 - Hiển thị trên heculers sau mỗi 500ms.
 
+## Video mô phỏng
+> https://youtube.com/shorts/HejG3po4_mc?feature=share

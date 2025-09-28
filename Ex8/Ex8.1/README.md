@@ -131,3 +131,5 @@ int main(){
 ```
 - Gọi biến để lưu kết quả ADC và điện áp.
 - Trong vòng lặp: nếu nhấn nút PA1 → đọc ADC, đổi sang mV và in qua UART.
+## Video mô phỏng
+> https://youtube.com/shorts/V7SrAcS9btU?feature=share

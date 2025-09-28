@@ -167,4 +167,4 @@ int main(void) {
 
 
 ## Video mô phỏng
-> https://youtube.com/shorts/NnCrl1b1bwE?feature=share
+> https://youtube.com/shorts/Jrh28g9ues8?feature=share
