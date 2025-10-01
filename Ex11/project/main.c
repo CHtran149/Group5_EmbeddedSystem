@@ -1,0 +1,11 @@
+#include "stm32f10x.h"                  // Device header
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_rcc.h"
+
+
+int main(){
+
+	while(1){
+		
+	}
+}

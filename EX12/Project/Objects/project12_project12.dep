@@ -1,0 +1,182 @@
+Dependencies for Project 'project12', Target 'project12': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
+F (.\main.c)(0x68DC02A6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\StdPeriph\inc\stm32f10x_rcc.h)(0x4D7849C4)
+I (..\StdPeriph\inc\stm32f10x_gpio.h)(0x4D7849C4)
+F (..\FreeRTOS\src\event_groups.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\event_groups.o --omf_browse .\objects\event_groups.crf --depend .\objects\event_groups.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\timers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\event_groups.h)(0x68DBE699)
+F (..\FreeRTOS\src\heap_4.c)(0x68DBE69B)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\heap_4.o --omf_browse .\objects\heap_4.crf --depend .\objects\heap_4.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC78414)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+F (..\FreeRTOS\src\list.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\list.o --omf_browse .\objects\list.crf --depend .\objects\list.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+F (..\FreeRTOS\src\port.c)(0x68DBE69C)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\port.o --omf_browse .\objects\port.crf --depend .\objects\port.d)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+F (..\FreeRTOS\src\croutine.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\croutine.o --omf_browse .\objects\croutine.crf --depend .\objects\croutine.d)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\croutine.h)(0x68DBE699)
+F (..\FreeRTOS\src\queue.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC78414)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\queue.h)(0x68DBE699)
+F (..\FreeRTOS\src\stream_buffer.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\stream_buffer.o --omf_browse .\objects\stream_buffer.crf --depend .\objects\stream_buffer.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC78414)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\stream_buffer.h)(0x68DBE699)
+F (..\FreeRTOS\src\tasks.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\tasks.o --omf_browse .\objects\tasks.crf --depend .\objects\tasks.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC78414)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\timers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\stack_macros.h)(0x68DBE699)
+F (..\FreeRTOS\src\timers.c)(0x68DBE699)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\timers.o --omf_browse .\objects\timers.crf --depend .\objects\timers.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC7840C)
+I (..\FreeRTOS\inc\FreeRTOS.h)(0x68DBE699)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5EC7840C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\Project\FreeRTOSConfig.h)(0x68DC016F)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\FreeRTOS\inc\projdefs.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portable.h)(0x68DBE699)
+I (..\FreeRTOS\inc\deprecated_definitions.h)(0x68DBE699)
+I (..\FreeRTOS\inc\portmacro.h)(0x68DBE69C)
+I (..\FreeRTOS\inc\mpu_wrappers.h)(0x68DBE699)
+I (..\FreeRTOS\inc\task.h)(0x68DBE699)
+I (..\FreeRTOS\inc\list.h)(0x68DBE699)
+I (..\FreeRTOS\inc\queue.h)(0x68DBE699)
+I (..\FreeRTOS\inc\timers.h)(0x68DBE699)
+F (..\StdPeriph\src\stm32f10x_rcc.c)(0x4D7849C4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\stm32f10x_rcc.o --omf_browse .\objects\stm32f10x_rcc.crf --depend .\objects\stm32f10x_rcc.d)
+I (..\StdPeriph\inc\stm32f10x_rcc.h)(0x4D7849C4)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+F (..\StdPeriph\src\stm32f10x_gpio.c)(0x4D79FCD6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\stm32f10x_gpio.o --omf_browse .\objects\stm32f10x_gpio.crf --depend .\objects\stm32f10x_gpio.d)
+I (..\StdPeriph\inc\stm32f10x_gpio.h)(0x4D7849C4)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)
+I (..\StdPeriph\inc\stm32f10x_rcc.h)(0x4D7849C4)
+F (RTE\Device\STM32F103C8\RTE_Device.h)(0x5FC05DFA)()
+F (RTE\Device\STM32F103C8\startup_stm32f10x_md.s)(0x61AD876E)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include--pd "__UVISION_VERSION SETA 531" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)
+F (RTE\Device\STM32F103C8\system_stm32f10x.c)(0x61AD876E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\FreeRTOS\inc -I ..\StdPeriph\inc -I ..\CMSIS\Core -I ..\CMSIS\Device\STM32F10X -I ..\Project-I.\RTE\Device\STM32F103C8-I.\RTE\_project12-IC:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="531" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
+I (..\CMSIS\Device\STM32F10X\stm32f10x.h)(0x4D784AC4)
+I (..\CMSIS\Core\core_cm3.h)(0x4D524968)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC7840C)
+I (..\CMSIS\Device\STM32F10X\system_stm32f10x.h)(0x4D784ABA)

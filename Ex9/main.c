@@ -98,7 +98,7 @@ void ADC1_Init(void) {
   while(ADC_GetResetCalibrationStatus(ADC1));
   ADC_StartCalibration(ADC1);
   while(ADC_GetCalibrationStatus(ADC1));
-  // Bat dau ADC
+  // Bat dau ADC bang phan mem 
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
@@ -136,7 +136,7 @@ void Nvic_Init(){
 
 /* ISR DMA */
 void DMA1_Channel1_IRQHandler(void) {
-  if (DMA_GetITStatus(DMA1_IT_TC1)) { //ktra co transfer complete channel1
+  if (DMA_GetITStatus(DMA1_IT_TC1)) { //ktra co transfer complete channel1 khi du 16 ptu
     dma_transfer_done = 1; // báo hi?u dã xong 1 vòng DMA
     DMA_ClearITPendingBit(DMA1_IT_TC1); // xoa co ngat
   }

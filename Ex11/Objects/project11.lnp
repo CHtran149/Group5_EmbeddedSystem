@@ -1,0 +1,19 @@
+--cpu Cortex-M3
+".\objects\core_cm3.o"
+".\objects\startup_stm32f10x_md.o"
+".\objects\misc.o"
+".\objects\stm32f10x_gpio.o"
+".\objects\stm32f10x_rcc.o"
+".\objects\main.o"
+".\objects\stm32f10x_it.o"
+".\objects\system_stm32f10x.o"
+".\objects\list.o"
+".\objects\queue.o"
+".\objects\tasks.o"
+".\objects\heap_4.o"
+".\objects\port.o"
+".\objects\timers.o"
+--strict --scatter ".\Objects\project11.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\project11.map" -o .\Objects\project11.axf
