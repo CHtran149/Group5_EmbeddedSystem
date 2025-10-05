@@ -6,19 +6,19 @@
 /* Hardware description related definitions. **********************************/
 /******************************************************************************/
 
-#define configCPU_CLOCK_HZ    ( ( unsigned long ) 20000000 )
+#define configCPU_CLOCK_HZ    			 72000000UL
 
 /******************************************************************************/
 /* Scheduling behaviour related definitions. **********************************/
 /******************************************************************************/
 
-#define configTICK_RATE_HZ                         ( 100U )
+#define configTICK_RATE_HZ                         1000
 #define configUSE_PREEMPTION                       1
 #define configUSE_TIME_SLICING                     1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION    0
-#define configUSE_TICKLESS_IDLE                    1
+#define configUSE_TICKLESS_IDLE                    0
 #define configMAX_PRIORITIES                       5U
-#define configMINIMAL_STACK_SIZE                   128U
+#define configMINIMAL_STACK_SIZE                   256
 #define configMAX_TASK_NAME_LEN                    4U
 #define configTICK_TYPE_WIDTH_IN_BITS              TICK_TYPE_WIDTH_32_BITS
 #define configIDLE_SHOULD_YIELD                    1
@@ -45,7 +45,7 @@
 
 #define configSUPPORT_STATIC_ALLOCATION              1
 #define configSUPPORT_DYNAMIC_ALLOCATION             1
-#define configTOTAL_HEAP_SIZE                        4096U
+#define configTOTAL_HEAP_SIZE                        (10*1024)
 #define configAPPLICATION_ALLOCATED_HEAP             0
 #define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP    0
 #define configUSE_MINI_LIST_ITEM                     0

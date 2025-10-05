@@ -29,3 +29,13 @@
 .\objects\stm32f10x_it.o: .\lib\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\stm32f10x_it.o: .\lib\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\objects\stm32f10x_it.o: .\lib\STM32F10x_StdPeriph_Driver\inc\misc.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\stm32f10x_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\stm32f10x_it.o: .\project\FreeRTOSConfig.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\projdefs.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\portable.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\task.h
+.\objects\stm32f10x_it.o: .\FreeRTOS\include\list.h

@@ -76,6 +76,7 @@ int main(){
 	GPIO_SetBits(GPIOA, GPIO_Pin_0);
 	while(1){
 		if(stt){
+			
 			if(strstr(res, ONLED) != NULL){ //hàm strstr tìm con tro dau tien den chuoi con trong chuoi lon.
 				GPIO_ResetBits(GPIOA, GPIO_Pin_0);
 			}
