@@ -259,6 +259,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -266,10 +270,14 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_0){
-		osSemaphoreRelease(sema01Handle);
-	}
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    if (GPIO_Pin == GPIO_PIN_0) {
+				printf("EXTI0");
+        xSemaphoreGiveFromISR(sema01Handle, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    }
 }
+
 
 /* USER CODE END 4 */
 
@@ -286,11 +294,11 @@ void Task01Funct(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-		osSemaphoreWait(sema01Handle, osWaitForever);
-
-    printf("Button pressed! Toggling LED...\r\n");
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-		osDelay(1000);
+		if (xSemaphoreTake(sema01Handle, portMAX_DELAY) == pdTRUE)
+    {
+        printf("Button pressed!\r\n");
+        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+    }
   }
   /* USER CODE END 5 */
 }
