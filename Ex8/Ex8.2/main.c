@@ -19,6 +19,7 @@ void Delay_ms(unsigned int t){
 
 void Config_Usart(){
 	GPIO_InitTypeDef gpio;
+ 
 	USART_InitTypeDef usart;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
 	gpio.GPIO_Mode		= GPIO_Mode_AF_PP;
