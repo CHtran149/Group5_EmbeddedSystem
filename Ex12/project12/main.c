@@ -33,7 +33,7 @@ void Config_Led(void){
 }
 
 void Task_Led_Funct(void * argument){
-	uint32_t delay_time = 500;
+	uint32_t delay_time;
 	uint32_t recv_time;
 	while(1){
 		if(xQueueReceive(Queue01, &recv_time, 0) == pdPASS){
@@ -48,13 +48,14 @@ void Task_Ctrl_Funct(void * argument){
 	uint32_t min = 500;
 	uint8_t check = 0;
 	while(1){
-		vTaskDelay(pdMS_TO_TICKS(5000));
 		if(check == 0){
 			xQueueOverwrite(Queue01, &max);
+			vTaskDelay(pdMS_TO_TICKS(5000));
 			check = 1;
 		}
 		else{
 			xQueueOverwrite(Queue01, &min);
+			vTaskDelay(pdMS_TO_TICKS(10000));
 			check = 0;
 		}
 	}
