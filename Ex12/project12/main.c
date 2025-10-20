@@ -36,7 +36,7 @@ void Task_Led_Funct(void * argument){
 	uint32_t delay_time;
 	uint32_t recv_time;
 	while(1){
-		if(xQueueReceive(Queue01, &recv_time, 0) == pdPASS){
+		if(xQueueReceive(Queue01, &recv_time, portMAX_DELAY) == pdPASS){
 			delay_time = recv_time;
 		}
 		GPIOA->ODR ^= GPIO_Pin_0;
