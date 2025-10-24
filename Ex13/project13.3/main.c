@@ -63,7 +63,7 @@ void Task01_Funct(void * argument){
 		if(xSemaphoreTake(Mutex01, portMAX_DELAY) == pdTRUE){
 			uart_SendStr("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 			xSemaphoreGive(Mutex01);
-			vTaskDelay(500);
+			vTaskDelay(100);
 		}
 	}
 }
@@ -73,7 +73,7 @@ void Task02_Funct(void * argument){
 	if(xSemaphoreTake(Mutex01, portMAX_DELAY) == pdTRUE){
 			uart_SendStr("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
 			xSemaphoreGive(Mutex01);
-			vTaskDelay(500);
+			vTaskDelay(100);
 		}
 	}
 }

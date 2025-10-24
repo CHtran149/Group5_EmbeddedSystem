@@ -57,14 +57,14 @@ void uart_SendStr(char *str){
 void Task01_Funct(void * argument){
 	while(1){
 		uart_SendStr("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-		vTaskDelay(10);
+		vTaskDelay(100);
 	}
 }
 
 void Task02_Funct(void * argument){
 	while(1){
 		uart_SendStr("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
-		vTaskDelay(12);
+		vTaskDelay(100);
 	}
 }
 
