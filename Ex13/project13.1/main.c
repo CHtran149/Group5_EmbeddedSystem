@@ -4,8 +4,8 @@
 #include "task.h"                       // ARM.FreeRTOS::RTOS:Core
 #include "semphr.h"                     // ARM.FreeRTOS::RTOS:Core
 
-TaskHandle_t Task_Led;
-TaskHandle_t Task_Ctrl;
+//TaskHandle_t Task_Led;
+//TaskHandle_t Task_Ctrl;
 SemaphoreHandle_t Sema_Btn;
 void Task_Led_Funct(void * argument);
 void Task_Ctrl_Funct(void * argument);
