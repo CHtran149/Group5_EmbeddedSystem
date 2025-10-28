@@ -1,9 +1,16 @@
 #include "stm32f10x.h"                  // Device header
 #include "stm32f10x_tim.h"              // Keil::Device:StdPeriph Drivers:TIM
 
+void DelayMs(int x){
+	int i, j;
+	for(i=0; i<x;i++){
+		for(j=0; j<0x2aff;j++);
+	}
+}
+
 void GPIO_Config(void) {
 	  GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
@@ -48,7 +55,7 @@ void enter_sleep_mode(void) {
 int main(void) {
     GPIO_Config();
     TIM2_Config();
-
+		DelayMs(1000);
     while (1) {
         enter_sleep_mode(); // MCU sẽ ngủ và thức dậy mỗi 1 giây để đảo LED
     }
