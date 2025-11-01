@@ -1,5 +1,5 @@
-.\objects\main.o: main.c
-.\objects\main.o: all_header.h
+.\objects\main.o: Lib\main\main.c
+.\objects\main.o: Lib\main\all_header.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h

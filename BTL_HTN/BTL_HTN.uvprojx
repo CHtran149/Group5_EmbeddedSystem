@@ -384,14 +384,14 @@
           <GroupName>main</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
               <FileName>all_header.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\all_header.h</FilePath>
+              <FilePath>.\Lib\main\all_header.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\main\main.c</FilePath>
             </File>
           </Files>
         </Group>
