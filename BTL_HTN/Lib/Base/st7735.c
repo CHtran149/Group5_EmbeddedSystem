@@ -123,3 +123,17 @@ void FillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
         }
     }
 }
+
+// Hàm xoay 
+void ST7735_SetRotation(uint8_t mode)
+{
+    ST7735_WriteCMD(0x36);
+    switch (mode)
+    {
+        case 0: ST7735_WriteData(0x00); break; // Portrait
+        case 1: ST7735_WriteData(0x60); break; // Portrait 180
+        case 2: ST7735_WriteData(0xA0); break; // Landscape
+        case 3: ST7735_WriteData(0xC0); break; // Landscape 270
+        default: ST7735_WriteData(0x00); break;
+    }
+}

@@ -38,5 +38,6 @@ void ST7735_FillScreen(uint16_t color);
 void ST7735_draw(uint16_t color);
 void ST7735_drawPixel(int16_t x,int16_t y,uint16_t color);
 void FillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
+void ST7735_SetRotation(uint8_t mode);
 
 #endif

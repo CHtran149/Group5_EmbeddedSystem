@@ -36,8 +36,9 @@ int main(void){
   ST7735_CS_HIGH();
   ST7735_Init();
 	
+	ST7735_SetRotation(0);
 	IOT47_GFX_connectToDriver(&ST7735_drawPixel);
-  FontMakerPutString(10,5,"Starting...", &FontDemo1, WHITE, BLACK);
+//  FontMakerPutString(10,5,"Starting...", &FontDemo1, WHITE, BLACK);
 	
 	Buzzer_Init(1000, 72);// config PWM tim1
   Buzzer_SetFrequency(2000); // còi 2 kHz
@@ -117,39 +118,59 @@ void Task_Display(void *pvParameters)
 {
     PZEM_Data_t data;
     char buf[40];
+	
+    static uint8_t oldMuted = 0; // Lưu trạng thái cũ của còi
 
     for (;;)
     {
-        // Chờ mail mới (block đến có dữ liệu)
+        // Chờ mail mới từ Task_PZEM
         if (xQueueReceive(xPzemQueue, &data, portMAX_DELAY) == pdTRUE)
         {
-            // Vẽ lên màn hình dưới sự bảo vệ của SPI mutex
             if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(100)) == pdTRUE)
             {
-                // xóa vùng data (bạn dùng FillRect implementation)
-                FillRect(0, 20, 128, 140, BLACK);
+                // --- Tiêu đề nhóm cố định ---
+                FontMakerPutString(0, 0, "Group05EmbeddedSystem", &FontDemo1, CYAN, BLACK);
 
-                sprintf(buf, "U=%.1f V", data.voltage);
-                FontMakerPutString(5, 25, buf, &FontDemo1, WHITE, BLACK);
+                // --- Voltage ---
+								FillRect(5, 15, 120, 14, BLACK);
+								sprintf(buf, "U=%.1f V", data.voltage);
+								FontMakerPutString(5, 15, buf, &FontDemo1, WHITE, BLACK);
 
-                sprintf(buf, "I=%.3f A", data.current);
-                FontMakerPutString(5, 45, buf, &FontDemo1, WHITE, BLACK);
+								// Current
+								FillRect(5, 28, 120, 14, BLACK);
+								sprintf(buf, "I=%.3f A", data.current);
+								FontMakerPutString(5, 28, buf, &FontDemo1, WHITE, BLACK);
 
-                sprintf(buf, "P=%.1f W", data.power);
-                FontMakerPutString(5, 65, buf, &FontDemo1, WHITE, BLACK);
+								// Power
+								FillRect(5, 41, 120, 14, BLACK);
+								sprintf(buf, "P=%.1f W", data.power);
+								FontMakerPutString(5, 41, buf, &FontDemo1, WHITE, BLACK);
 
-                sprintf(buf, "E=%.0f Wh", data.energy);
-                FontMakerPutString(5, 85, buf, &FontDemo1, WHITE, BLACK);
+								// Energy
+								FillRect(5, 54, 120, 14, BLACK);
+								sprintf(buf, "E=%.0f Wh", data.energy);
+								FontMakerPutString(5, 54, buf, &FontDemo1, WHITE, BLACK);
 
-                sprintf(buf, "f=%.1f Hz", data.freq);
-                FontMakerPutString(5, 105, buf, &FontDemo1, WHITE, BLACK);
+								// Frequency
+								FillRect(5, 67, 120, 14, BLACK);
+								sprintf(buf, "f=%.1f Hz", data.freq);
+								FontMakerPutString(5, 67, buf, &FontDemo1, WHITE, BLACK);
 
-                sprintf(buf, "PF=%.2f", data.pf);
-                FontMakerPutString(5, 125, buf, &FontDemo1, WHITE, BLACK);
+								// PF
+								FillRect(5, 80, 120, 14, BLACK);
+								sprintf(buf, "PF=%.2f", data.pf);
+								FontMakerPutString(5, 80, buf, &FontDemo1, WHITE, BLACK);
 
-                // nếu còi muted/hay trạng thái khác, display sẽ được cập nhật
-                if (buzzer_muted) {
-                    FontMakerPutString(5, 145, "Muted", &FontDemo1, YELLOW, BLACK);
+                // --- Muted status ---
+                if (buzzer_muted != oldMuted)
+                {
+                    FillRect(5, 93, 120, 14, BLACK);
+                    if (buzzer_muted)
+                        FontMakerPutString(5, 93, "Muted", &FontDemo1, YELLOW, BLACK);
+                    else
+                        FontMakerPutString(5, 93, "Unmuted", &FontDemo1, WHITE, BLACK);
+
+                    oldMuted = buzzer_muted;
                 }
 
                 xSemaphoreGive(xSPIMutex);
@@ -161,7 +182,7 @@ void Task_Display(void *pvParameters)
 /* ------------------ Task: kiểm soát cảnh báo + còi ------------------ */
 void Task_Alert(void *pvParameters)
 {
-    const float POWER_THRESHOLD = 1000.0f;
+    const float POWER_THRESHOLD = 5.0f;
     PZEM_Data_t snapshot;
 
     for (;;)
@@ -187,7 +208,8 @@ void Task_Alert(void *pvParameters)
             // hiển thị cảnh báo (cần mutex SPI)
             if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(50)) == pdTRUE)
             {
-                FontMakerPutString(5, 145, "OVERLOAD!", &FontDemo1, RED, BLACK);
+								FillRect(0, 106, 128, 14, BLACK);
+                FontMakerPutString(5, 106, "*** OVERLOAD! ***", &FontDemo1, RED, BLACK);
                 xSemaphoreGive(xSPIMutex);
             }
         }
@@ -197,7 +219,7 @@ void Task_Alert(void *pvParameters)
             // xóa cảnh báo (vẽ " " hoặc xóa vùng)
             if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(50)) == pdTRUE)
             {
-                FillRect(0, 140, 128, 24, BLACK);
+                FillRect(0, 106, 128, 14, BLACK);
                 xSemaphoreGive(xSPIMutex);
             }
         }

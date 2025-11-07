@@ -62,10 +62,10 @@ void PZEM_ReadAll(TickType_t timeout_ticks){
     // Giải mã dữ liệu
     voltage = ((PZEM_Response[3]<<8)|PZEM_Response[4]) / 10.0f;
 
-    uint32_t i_current = (PZEM_Response[5]) | (PZEM_Response[6]<<8) | (PZEM_Response[7]<<16) | (PZEM_Response[8]<<24);
+    uint32_t i_current = (PZEM_Response[5] << 8) | (PZEM_Response[6]);
     current = i_current / 1000.0f;
 
-    uint32_t i_power = (PZEM_Response[9]) | (PZEM_Response[10]<<8) | (PZEM_Response[11]<<16) | (PZEM_Response[12]<<24);
+    uint32_t i_power = (PZEM_Response[9] << 8) | (PZEM_Response[10]);
     power = i_power / 10.0f;
 
     uint32_t i_energy = (PZEM_Response[13]) | (PZEM_Response[14]<<8) | (PZEM_Response[15]<<16) | (PZEM_Response[16]<<24);
