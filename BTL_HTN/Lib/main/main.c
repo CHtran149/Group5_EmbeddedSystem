@@ -17,6 +17,13 @@ static SemaphoreHandle_t xSPIMutex;     // bảo vệ SPI + driver màn hình
 static SemaphoreHandle_t xDataMutex;    // bảo vệ biến gPzemData
 static SemaphoreHandle_t xButtonSem;    // binary semaphore: ISR -> ButtonTask
 
+static SemaphoreHandle_t xButtonSem0;  // semaphore riêng cho PA0
+
+/* ------------------ Global threshold ------------------ */
+static volatile float gPowerThreshold = 5.0f;   // ngưỡng mặc định
+static const float thresholdLevels[] = {5.0f, 25.0f, 50.0f};
+static uint8_t thresholdIndex = 0;  // vị trí hiện tại trong mảng trên
+
 /* ------------------ global shared data ------------------ */
 static PZEM_Data_t gPzemData;
 static volatile uint8_t buzzer_muted = 0;
@@ -26,12 +33,14 @@ void Task_PZEM(void *pvParameters);
 void Task_Display(void *pvParameters);
 void Task_Alert(void *pvParameters);
 void Task_ButtonHandler(void *pvParameters);
+void Task_ThresholdButton(void *pvParameters);
 
 int main(void){
 
 	Config_SPI();
 	Config_UART();
-	Config_Button();
+	Config_Button_PA0();
+	Config_Button_PA1();
 	
   ST7735_CS_HIGH();
   ST7735_Init();
@@ -47,6 +56,7 @@ int main(void){
   xSPIMutex = xSemaphoreCreateMutex();
   xDataMutex = xSemaphoreCreateMutex();
   xButtonSem = xSemaphoreCreateBinary();
+	xButtonSem0 = xSemaphoreCreateBinary();
 
   /* ---- tạo queue (mail) - length 4 (bạn chỉnh tuỳ) ---- */
   xPzemQueue = xQueueCreate(4, sizeof(PZEM_Data_t));
@@ -61,11 +71,24 @@ int main(void){
   xTaskCreate(Task_Alert,     "ALERT",   256, NULL,  3, NULL);
   xTaskCreate(Task_Display,   "DISP",    512, NULL,  2, NULL);
   xTaskCreate(Task_ButtonHandler,"BTN",   256, NULL,  4, NULL);
+	xTaskCreate(Task_ThresholdButton, "BTN0", 256, NULL, 4, NULL);
 
   vTaskStartScheduler();
 	while(1){
 		
 	}
+}
+
+/* ------------------ EXTI ISR (PA0) ------------------ */
+void EXTI0_IRQHandler(void)
+{
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    if (EXTI_GetITStatus(EXTI_Line0) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line0);
+        xSemaphoreGiveFromISR(xButtonSem0, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    }
 }
 
 /* ------------------ EXTI ISR (PA1) ------------------ */
@@ -131,44 +154,45 @@ void Task_Display(void *pvParameters)
                 // --- Tiêu đề nhóm cố định ---
                 FontMakerPutString(0, 0, "Group05EmbeddedSystem", &FontDemo1, CYAN, BLACK);
 
-                // --- Voltage ---
-								FillRect(5, 15, 120, 14, BLACK);
-								sprintf(buf, "U=%.1f V", data.voltage);
-								FontMakerPutString(5, 15, buf, &FontDemo1, WHITE, BLACK);
+								FillRect(0, 15, 128, 13, BLACK);
+                sprintf(buf, "Threshold=%.0fW", gPowerThreshold);
+                FontMakerPutString(5, 12, buf, &FontDemo1, GREEN, BLACK);
 
-								// Current
-								FillRect(5, 28, 120, 14, BLACK);
-								sprintf(buf, "I=%.3f A", data.current);
+                // --- Voltage ---
+								FillRect(0, 28, 128, 13, BLACK);
+								sprintf(buf, "U=%.1f V", data.voltage);
 								FontMakerPutString(5, 28, buf, &FontDemo1, WHITE, BLACK);
 
+								// Current
+								sprintf(buf, "I=%.3f A", data.current);
+								FontMakerPutString(70, 28, buf, &FontDemo1, WHITE, BLACK);
+
 								// Power
-								FillRect(5, 41, 120, 14, BLACK);
+								FillRect(0, 41, 128, 13, BLACK);
 								sprintf(buf, "P=%.1f W", data.power);
 								FontMakerPutString(5, 41, buf, &FontDemo1, WHITE, BLACK);
 
 								// Energy
-								FillRect(5, 54, 120, 14, BLACK);
 								sprintf(buf, "E=%.0f Wh", data.energy);
-								FontMakerPutString(5, 54, buf, &FontDemo1, WHITE, BLACK);
+								FontMakerPutString(70, 41, buf, &FontDemo1, WHITE, BLACK);
 
 								// Frequency
-								FillRect(5, 67, 120, 14, BLACK);
+								FillRect(0, 54, 128, 13, BLACK);
 								sprintf(buf, "f=%.1f Hz", data.freq);
-								FontMakerPutString(5, 67, buf, &FontDemo1, WHITE, BLACK);
+								FontMakerPutString(5, 54, buf, &FontDemo1, WHITE, BLACK);
 
 								// PF
-								FillRect(5, 80, 120, 14, BLACK);
 								sprintf(buf, "PF=%.2f", data.pf);
-								FontMakerPutString(5, 80, buf, &FontDemo1, WHITE, BLACK);
+								FontMakerPutString(70, 54, buf, &FontDemo1, WHITE, BLACK);
 
                 // --- Muted status ---
                 if (buzzer_muted != oldMuted)
                 {
-                    FillRect(5, 93, 120, 14, BLACK);
+                    FillRect(5, 67, 120, 13, BLACK);
                     if (buzzer_muted)
-                        FontMakerPutString(5, 93, "Muted", &FontDemo1, YELLOW, BLACK);
+                        FontMakerPutString(5, 67, "Muted", &FontDemo1, YELLOW, BLACK);
                     else
-                        FontMakerPutString(5, 93, "Unmuted", &FontDemo1, WHITE, BLACK);
+                        FontMakerPutString(5, 67, "Unmuted", &FontDemo1, WHITE, BLACK);
 
                     oldMuted = buzzer_muted;
                 }
@@ -182,7 +206,8 @@ void Task_Display(void *pvParameters)
 /* ------------------ Task: kiểm soát cảnh báo + còi ------------------ */
 void Task_Alert(void *pvParameters)
 {
-    const float POWER_THRESHOLD = 5.0f;
+    extern volatile float gPowerThreshold;
+
     PZEM_Data_t snapshot;
 
     for (;;)
@@ -195,7 +220,7 @@ void Task_Alert(void *pvParameters)
         }
 
         // Kiểm tra ngưỡng
-        if ((snapshot.power > POWER_THRESHOLD) && (buzzer_muted == 0))
+        if ((snapshot.power > gPowerThreshold) && (buzzer_muted == 0))
         {
             // Bật còi (cài duty >0 trước khi TIM enable)
             Buzzer_SetFrequency(2000);
@@ -208,10 +233,11 @@ void Task_Alert(void *pvParameters)
             // hiển thị cảnh báo (cần mutex SPI)
             if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(50)) == pdTRUE)
             {
-								FillRect(0, 106, 128, 14, BLACK);
-                FontMakerPutString(5, 106, "*** OVERLOAD! ***", &FontDemo1, RED, BLACK);
+								FillRect(0, 90, 128, 13, BLACK);
+                FontMakerPutString(5, 90, "*** OVERLOAD! ***", &FontDemo1, RED, BLACK);
                 xSemaphoreGive(xSPIMutex);
             }
+						
         }
         else
         {
@@ -219,7 +245,7 @@ void Task_Alert(void *pvParameters)
             // xóa cảnh báo (vẽ " " hoặc xóa vùng)
             if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(50)) == pdTRUE)
             {
-                FillRect(0, 106, 128, 14, BLACK);
+                FillRect(0, 90, 128, 13, BLACK);
                 xSemaphoreGive(xSPIMutex);
             }
         }
@@ -242,21 +268,38 @@ void Task_ButtonHandler(void *pvParameters)
             {
                 // toggle trạng thái mute
                 buzzer_muted = !buzzer_muted;
-
-                // cập nhật hiển thị trạng thái ngay (dùng SPI mutex)
-                if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(100)) == pdTRUE)
-                {
-                    if (buzzer_muted) {
-                        FontMakerPutString(5, 145, "Muted", &FontDemo1, YELLOW, BLACK);
-                        Buzzer_Stop();
-                    } else {
-                        FontMakerPutString(5, 145, "Unmuted", &FontDemo1, WHITE, BLACK);
-                    }
-                    xSemaphoreGive(xSPIMutex);
-                }
             }
             // đợi nút nhả (tránh nhiều lần trigger)
             vTaskDelay(pdMS_TO_TICKS(200));
+        }
+    }
+}
+
+/* ------------------ Task: thay đổi ngưỡng cảnh báo (PA0) ------------------ */
+void Task_ThresholdButton(void *pvParameters)
+{
+    for (;;)
+    {
+        if (xSemaphoreTake(xButtonSem0, portMAX_DELAY) == pdTRUE)
+        {
+            vTaskDelay(pdMS_TO_TICKS(50)); // debounce
+            if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0) // nút vẫn nhấn
+            {
+                // Tăng chỉ số ngưỡng (vòng tròn)
+                thresholdIndex = (thresholdIndex + 1) % 3;
+                gPowerThreshold = thresholdLevels[thresholdIndex];
+
+                // Hiển thị lại ngưỡng hiện tại trên TFT
+                if (xSemaphoreTake(xSPIMutex, pdMS_TO_TICKS(100)) == pdTRUE)
+                {
+                    char buf[20];
+										FillRect(0, 15, 128, 13, BLACK);
+										sprintf(buf, "Threshold=%.0fW", gPowerThreshold);
+										FontMakerPutString(5, 12, buf, &FontDemo1, GREEN, BLACK);
+                    xSemaphoreGive(xSPIMutex);
+                }
+            }
+            vTaskDelay(pdMS_TO_TICKS(200)); // chờ nhả
         }
     }
 }

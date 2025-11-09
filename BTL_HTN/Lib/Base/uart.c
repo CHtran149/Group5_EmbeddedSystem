@@ -3,7 +3,7 @@
 // Mutex UART
 SemaphoreHandle_t xUARTMutex;
 
-void Config_Button(void){
+void Config_Button_PA1(void){
 	GPIO_InitTypeDef button;
 	EXTI_InitTypeDef exti;
 	NVIC_InitTypeDef nvic;
@@ -26,7 +26,29 @@ void Config_Button(void){
 	nvic.NVIC_IRQChannelCmd	= ENABLE;
 	NVIC_Init(&nvic);
 }
-
+void Config_Button_PA0(void){
+	GPIO_InitTypeDef button;
+	EXTI_InitTypeDef exti;
+	NVIC_InitTypeDef nvic;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+	
+	button.GPIO_Mode		= GPIO_Mode_IPU;
+	button.GPIO_Pin			= GPIO_Pin_0;
+	GPIO_Init(GPIOA, &button);
+	
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource1);
+	exti.EXTI_Line		= EXTI_Line0;
+	exti.EXTI_LineCmd	= ENABLE;
+	exti.EXTI_Mode		= EXTI_Mode_Interrupt;
+	exti.EXTI_Trigger	= EXTI_Trigger_Falling;
+	EXTI_Init(&exti);
+	
+	nvic.NVIC_IRQChannel		= EXTI0_IRQn;
+	nvic.NVIC_IRQChannelPreemptionPriority = 5;
+	nvic.NVIC_IRQChannelSubPriority	= 0;
+	nvic.NVIC_IRQChannelCmd	= ENABLE;
+	NVIC_Init(&nvic);
+}
 // Cấu hình UART1
 void Config_UART(void){
     GPIO_InitTypeDef gpio;
@@ -35,8 +57,9 @@ void Config_UART(void){
     // Tạo mutex
     xUARTMutex = xSemaphoreCreateMutex();
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_USART1, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_USART1, ENABLE);
 
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     // TX
     gpio.GPIO_Mode = GPIO_Mode_AF_PP;
     gpio.GPIO_Pin = GPIO_Pin_9;
@@ -47,7 +70,18 @@ void Config_UART(void){
     gpio.GPIO_Pin = GPIO_Pin_10;
     gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(GPIOA, &gpio);
+		
+		//TX_USART3
+		gpio.GPIO_Mode = GPIO_Mode_AF_PP;
+    gpio.GPIO_Pin = GPIO_Pin_10;
+    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &gpio);
 
+    // RX_UART3
+    gpio.GPIO_Pin = GPIO_Pin_11;
+    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(GPIOB, &gpio);
+		
     uart.USART_BaudRate = 9600;
     uart.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     uart.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
@@ -57,6 +91,9 @@ void Config_UART(void){
 
     USART_Init(USART1, &uart);
     USART_Cmd(USART1, ENABLE);
+		
+		USART_Init(USART3, &uart);
+    USART_Cmd(USART3, ENABLE);
 }
 
 // Gửi byte có mutex
@@ -122,6 +159,6 @@ struct __FILE { int dummy; };
 FILE __stdout;
 
 int fputc(int ch, FILE *f){
-    UART_SendByte(USART1, ch);
+    UART_SendByte(USART3, ch);
     return ch;
 }

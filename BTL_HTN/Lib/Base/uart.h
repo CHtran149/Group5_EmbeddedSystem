@@ -10,7 +10,8 @@
 // Mutex bảo vệ UART
 extern SemaphoreHandle_t xUARTMutex;
 // Hàm config Button
-void Config_Button(void);
+void Config_Button_PA1(void);
+void Config_Button_PA0(void);
 // Hàm config UART
 void Config_UART(void);
 
