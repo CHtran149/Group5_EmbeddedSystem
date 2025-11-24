@@ -1,8 +1,5 @@
 #include "uart.h"
 
-// Mutex UART
-SemaphoreHandle_t xUARTMutex;
-
 void Config_Button_PA1(void){
 	GPIO_InitTypeDef button;
 	EXTI_InitTypeDef exti;
@@ -54,9 +51,6 @@ void Config_UART(void){
     GPIO_InitTypeDef gpio;
     USART_InitTypeDef uart;
 
-    // Tạo mutex
-    xUARTMutex = xSemaphoreCreateMutex();
-
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_USART1, ENABLE);
 
 		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
@@ -96,30 +90,6 @@ void Config_UART(void){
     USART_Cmd(USART3, ENABLE);
 }
 
-// Gửi byte có mutex
-void UART_SendByte_RTOS(USART_TypeDef* USARTx, uint8_t data){
-    if (xUARTMutex != NULL){
-        if (xSemaphoreTake(xUARTMutex, portMAX_DELAY) == pdTRUE){
-            while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET){
-                taskYIELD(); // nhường CPU cho task khác
-            }
-            USART_SendData(USARTx, data);
-            xSemaphoreGive(xUARTMutex);
-        }
-    }
-}
-
-// Nhận byte với timeout (tick)
-uint8_t UART_ReceiveByte_RTOS(USART_TypeDef* USARTx, TickType_t timeout_ticks){
-    TickType_t start = xTaskGetTickCount();
-    while (USART_GetFlagStatus(USARTx, USART_FLAG_RXNE) == RESET){
-        if ((xTaskGetTickCount() - start) >= timeout_ticks)
-            return 0xFF; // timeout
-        taskYIELD();
-    }
-    return USART_ReceiveData(USARTx);
-}
-/////////////
 void UART_SendByte(USART_TypeDef* USARTx, uint8_t data)
 {
     while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);

@@ -4,20 +4,12 @@
 #include "stm32f10x.h"
 #include <stdio.h>
 #include <stdint.h>
-#include "FreeRTOS.h"
-#include "semphr.h"
 
-// Mutex bảo vệ UART
-extern SemaphoreHandle_t xUARTMutex;
 // Hàm config Button
 void Config_Button_PA1(void);
 void Config_Button_PA0(void);
 // Hàm config UART
 void Config_UART(void);
-
-// Gửi/nhận byte RTOS
-void UART_SendByte_RTOS(USART_TypeDef* USARTx, uint8_t data);
-uint8_t UART_ReceiveByte_RTOS(USART_TypeDef* USARTx, TickType_t timeout_ticks);
 
 // Gửi/nhận byte 
 void UART_SendByte(USART_TypeDef* USARTx, uint8_t data);

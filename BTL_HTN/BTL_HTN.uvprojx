@@ -439,16 +439,6 @@
               <FilePath>.\Lib\Base\st7735.h</FilePath>
             </File>
             <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Lib\Base\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Lib\Base\delay.c</FilePath>
-            </File>
-            <File>
               <FileName>buzzer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Lib\Base\buzzer.c</FilePath>

@@ -31,5 +31,3 @@
 .\objects\pzem004t.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\list.h
 .\objects\pzem004t.o: Lib\Base\uart.h
 .\objects\pzem004t.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\pzem004t.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\semphr.h
-.\objects\pzem004t.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\queue.h

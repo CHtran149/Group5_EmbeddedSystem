@@ -18,17 +18,3 @@
 .\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\misc.h
 .\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\FreeRTOS.h
-.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\uart.o: .\RTE\RTOS\FreeRTOSConfig.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h
-.\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\projdefs.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\portable.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\deprecated_definitions.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\portable\RVDS\ARM_CM3\portmacro.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\mpu_wrappers.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\semphr.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\queue.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\task.h
-.\objects\uart.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\list.h

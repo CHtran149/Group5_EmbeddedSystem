@@ -16,7 +16,6 @@ static QueueHandle_t xPzemQueue;        // mail queue từ PZEM -> Display
 static SemaphoreHandle_t xSPIMutex;     // bảo vệ SPI + driver màn hình
 static SemaphoreHandle_t xDataMutex;    // bảo vệ biến gPzemData
 static SemaphoreHandle_t xButtonSem;    // binary semaphore: ISR -> ButtonTask
-
 static SemaphoreHandle_t xButtonSem0;  // semaphore riêng cho PA0
 
 /* ------------------ Global threshold ------------------ */
@@ -47,7 +46,6 @@ int main(void){
 	
 	ST7735_SetRotation(0);
 	IOT47_GFX_connectToDriver(&ST7735_drawPixel);
-//  FontMakerPutString(10,5,"Starting...", &FontDemo1, WHITE, BLACK);
 	
 	Buzzer_Init(1000, 72);// config PWM tim1
   Buzzer_SetFrequency(2000); // còi 2 kHz
@@ -223,11 +221,13 @@ void Task_Alert(void *pvParameters)
         if ((snapshot.power > gPowerThreshold) && (buzzer_muted == 0))
         {
             // Bật còi (cài duty >0 trước khi TIM enable)
-            Buzzer_SetFrequency(2000);
-            TIM_SetCompare1(TIM1, Buzzer_GetARR() / 2);
-            // cho đơn giản: dùng hàm Buzzer_Start có SetCompare1 bên trong
-            Buzzer_SetFrequency(2000);
-            // đặt duty 50%
+//            Buzzer_SetFrequency(1500);
+//            TIM_SetCompare1(TIM1, Buzzer_GetARR() / 2);
+//						vTaskDelay(pdMS_TO_TICKS(100));
+//            Buzzer_SetFrequency(2500);
+//            TIM_SetCompare1(TIM1, Buzzer_GetARR() / 2);
+//						vTaskDelay(pdMS_TO_TICKS(100));
+						Buzzer_SetFrequency(2000);
             TIM_SetCompare1(TIM1, Buzzer_GetARR() / 2);
             Buzzer_Start();
             // hiển thị cảnh báo (cần mutex SPI)

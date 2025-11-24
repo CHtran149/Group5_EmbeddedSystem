@@ -4,7 +4,6 @@
 ".\objects\pzem004t.o"
 ".\objects\spi.o"
 ".\objects\st7735.o"
-".\objects\delay.o"
 ".\objects\buzzer.o"
 ".\objects\fontmaker.o"
 ".\objects\graphic.o"

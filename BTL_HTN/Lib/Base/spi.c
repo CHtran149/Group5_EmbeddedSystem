@@ -1,14 +1,11 @@
 #include "spi.h"
 
-// Mutex SPI
-SemaphoreHandle_t xSPIMutex;
-
 void Config_SPI(void)
 {
     GPIO_InitTypeDef gpio;
     SPI_InitTypeDef spi;
     // Tạo mutex
-    xSPIMutex = xSemaphoreCreateMutex();
+//    xSPIMutex = xSemaphoreCreateMutex();
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1 | RCC_APB2Periph_GPIOA, ENABLE);
 
@@ -44,16 +41,6 @@ void SPI1_SendByte(uint8_t data)
     while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
     SPI_I2S_SendData(SPI1, data);
 		while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_BSY) == SET);
-}
-
-void SPI1_SendByte_RTOS(uint8_t data)
-{
-    if(xSemaphoreTake(xSPIMutex, portMAX_DELAY) == pdTRUE) {
-        while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
-        SPI_I2S_SendData(SPI1, data);
-        while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_BSY) == SET);
-        xSemaphoreGive(xSPIMutex);
-    }
 }
 
 

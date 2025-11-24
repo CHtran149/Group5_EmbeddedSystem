@@ -21,6 +21,7 @@
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\misc.h
 .\objects\main.o: .\Lib\Base\uart.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: .\Lib\Base\pzem004t.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\FreeRTOS.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: .\RTE\RTOS\FreeRTOSConfig.h
@@ -30,12 +31,11 @@
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\deprecated_definitions.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\portable\RVDS\ARM_CM3\portmacro.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\mpu_wrappers.h
-.\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\semphr.h
-.\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\queue.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\task.h
 .\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\list.h
-.\objects\main.o: .\Lib\Base\pzem004t.h
 .\objects\main.o: .\Lib\Base\spi.h
+.\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\semphr.h
+.\objects\main.o: C:\Users\ADMIN\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.1\Source\include\queue.h
 .\objects\main.o: .\Lib\Base\st7735.h
 .\objects\main.o: .\Lib\lib_ST7735\graphic.h
 .\objects\main.o: .\Lib\lib_ST7735\IOT47_VN_font.h

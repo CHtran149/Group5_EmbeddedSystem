@@ -2,6 +2,7 @@
 
 
 //(C) 2020 By Dao Nguyen IOT47.com
+// Dùng làm bảng tra offset ( vị trí bắt đầu của bitmap của từng kí tự)
 const uint16_t Microsoft_Sans_Serif26917_MAP[]={
 5,10,25,40,55,70,85,100,116,132,148,164,181,196,211,226,
 241,257,274,287,302,317,332,347,362,377,392,407,422,438,455,470,
@@ -20,6 +21,7 @@ const uint16_t Microsoft_Sans_Serif26917_MAP[]={
 3006,3020,3035,3050,3065,3080,3092,3118,3146,3174,3202,3222,
 };
 //(C) 2020 By Dao Nguyen IOT47.com
+// chứa dữ liệu từng kí tự (width, height, x_offset, y_offset, <bitmap dữ liệu>)
 const uint8_t Microsoft_Sans_Serif26917[]={
 13,
 3,1,1,0,

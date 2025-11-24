@@ -22,7 +22,7 @@ static float pf      = 0.0f;
 // 3. CRC16 chuẩn Modbus
 //====================================================
 static uint16_t Modbus_CRC16(uint8_t *buf, uint8_t len){
-    uint16_t crc = 0xFFFF;
+    uint16_t crc = 0xFFFF;                  // CRC_Modbus luôn bắt đầu bằng 0xFFFF
     for(uint8_t pos=0; pos<len; pos++){
         crc ^= (uint16_t)buf[pos];
         for(uint8_t i=0;i<8;i++){
@@ -32,7 +32,7 @@ static uint16_t Modbus_CRC16(uint8_t *buf, uint8_t len){
                 crc >>= 1;
         }
     }
-    return crc;
+    return crc; // Thuật toán CRC16 kiểu "bit-by-bit"
 }
 
 //====================================================
@@ -62,10 +62,10 @@ void PZEM_ReadAll(TickType_t timeout_ticks){
     // Giải mã dữ liệu
     voltage = ((PZEM_Response[3]<<8)|PZEM_Response[4]) / 10.0f;
 
-    uint32_t i_current = (PZEM_Response[5] << 8) | (PZEM_Response[6]);
+    uint32_t i_current = (PZEM_Response[5] << 8) | (PZEM_Response[6]) | (PZEM_Response[7] << 24) | (PZEM_Response[8] << 16);
     current = i_current / 1000.0f;
 
-    uint32_t i_power = (PZEM_Response[9] << 8) | (PZEM_Response[10]);
+    uint32_t i_power = (PZEM_Response[9] << 8) | (PZEM_Response[10]) | (PZEM_Response[11] << 24) | (PZEM_Response[12] << 16);
     power = i_power / 10.0f;
 
     uint32_t i_energy = (PZEM_Response[13]) | (PZEM_Response[14]<<8) | (PZEM_Response[15]<<16) | (PZEM_Response[16]<<24);
